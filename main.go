@@ -45,6 +45,9 @@ func main() {
 	currentIP := getCurrentIP()
 	recordID, recordIP := getRecord()
 
+	fmt.Println("Current IP:", currentIP)
+	fmt.Println("Record IP:", recordIP)
+
 	current, _ := regexp.MatchString(`^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`, currentIP)
 	record, _ := regexp.MatchString(`^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`, recordIP)
 
@@ -55,9 +58,6 @@ func main() {
 	if recordID == "" {
 		log.Fatal("Error getting record ID")
 	}
-
-	fmt.Println("Current IP:", currentIP)
-	fmt.Println("Record IP:", recordIP)
 	if currentIP != recordIP {
 		updateRecord(recordID, currentIP)
 	}
@@ -74,6 +74,8 @@ func loadEnv() {
 		if os.Getenv(key) == "" {
 			log.Fatalf("Missing required env variable: %s", key)
 		}
+
+		log.Print(key + ": " + os.Getenv(key))
 	}
 }
 
@@ -118,6 +120,8 @@ func getRecord() (string, string) {
 	}
 
 	for _, v := range data.Result {
+		log.Printf("Name: %s, Type: %s, Content: %s", v.Name, v.Type, v.Content)
+
 		if v.Name == os.Getenv("DOMAIN") {
 			return v.ID, v.Content
 		}
