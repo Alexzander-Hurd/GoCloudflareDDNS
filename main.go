@@ -123,7 +123,10 @@ func getRecord() (string, string) {
 		log.Printf("Name: %s, Type: %s, Content: %s", v.Name, v.Type, v.Content)
 
 		if v.Name == os.Getenv("DOMAIN") {
-			return v.ID, v.Content
+
+			if v.Type == "A" {
+				return v.ID, v.Content
+			}
 		}
 	}
 	return "", ""
