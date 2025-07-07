@@ -37,8 +37,9 @@ for platform in "${platforms[@]}"; do
     echo "Creating checksum for $output_name..."
     sha256sum "$BUILD_DIR/$archive_name" >> "$CHECKSUM_FILE"
     sha256sum "$BUILD_DIR/$output_name" >> "$CHECKSUM_FILE"
+    echo "" >> "$CHECKSUM_FILE"
 
     echo "Cleaning up..."
-    rm "$BUILD_DIR/$archive_name"
+    rm "$BUILD_DIR/$output_name"
 
 done
