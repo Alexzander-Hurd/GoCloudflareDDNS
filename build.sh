@@ -12,7 +12,7 @@ platforms=("linux/amd64" "linux/arm64" "darwin/amd64" "darwin/arm64" "windows/am
 
 for platform in "${platforms[@]}"; do
     IFS="/" read -r GOOS GOARCH <<<"$platform"
-    output_name="${APP_NAME}-{$VERSION}-${GOOS}-${GOARCH}"
+    output_name="${APP_NAME}-$VERSION-${GOOS}-${GOARCH}"
     if [ "$GOOS" = "windows" ]; then
         output_name+='.exe'
     fi
